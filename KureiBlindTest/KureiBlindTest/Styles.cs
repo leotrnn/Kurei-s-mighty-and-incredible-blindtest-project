@@ -31,67 +31,32 @@ namespace KureiBlindTest
         }
 
         // Méthodes
-        public void LoadStyle(List<Control> lstControls, int frmWidth)
+
+        public void CenterControl(Control control, int frmWidth)
         {
-            this.CustomControls(lstControls, frmWidth);
+            int positionX = (frmWidth - control.Width) / 2;
+            control.Location = new Point(positionX, control.Location.Y);
         }
 
-        public void LoadChoices(List<Control> lstControls, int frmWidth)
+        public void CustomizeChoice(Button btn)
         {
-            this.CustomChoices(lstControls, frmWidth);
+            this.LoadCustomFont(btn, 20f, colorFont);
+            btn.BackColor = colorBack;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btn.FlatAppearance.MouseOverBackColor = colorBackOver;
         }
 
-        private void CustomChoices(List<Control> lstControls, int frmWidth)
+        public void CustomizeButton(Button btn)
         {
-            int positionX;
-
-            foreach (Control obj in lstControls)
-            {
-                positionX = (frmWidth - obj.Width) / 2;
-                obj.Location = new Point(positionX, obj.Location.Y);
-
-                switch (obj)
-                {
-                    case Button button:
-                        this.LoadCustomFont(button, 20f, colorFont);
-                        button.BackColor = colorBack;
-                        button.FlatStyle = FlatStyle.Flat;
-                        button.FlatAppearance.BorderSize = 0;
-                        button.FlatAppearance.MouseDownBackColor = Color.Transparent;
-                        button.FlatAppearance.MouseOverBackColor = colorBackOver;
-                        break;
-                }
-            }
+            btn.BackColor = colorFont;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            this.LoadCustomFont(btn, 22f, colorBack);
         }
 
-        private void CustomControls(List<Control> lstControls, int frmWidth)
-        {
-            int positionX;
-
-            foreach (Control obj in lstControls)
-            {
-                positionX = (frmWidth - obj.Width) / 2;
-                obj.Location = new Point(positionX, obj.Location.Y);
-
-                switch (obj)
-                {
-                    case Label label:
-                        this.LoadCustomFont(label, 32f, colorFont);
-                        break;
-
-                    case Button button:
-                        button.BackColor = colorFont;
-                        button.FlatStyle = FlatStyle.Flat;
-                        button.FlatAppearance.BorderSize = 0;
-                        this.LoadCustomFont(button, 22f, colorBack);
-                        break;
-
-                  
-                }
-            }
-        }
-
-        private void LoadCustomFont(Control objectToCustom, float sizeFont, Color colorFont)
+        public void LoadCustomFont(Control objectToCustom, float sizeFont, Color colorFont)
         {
             try
             {

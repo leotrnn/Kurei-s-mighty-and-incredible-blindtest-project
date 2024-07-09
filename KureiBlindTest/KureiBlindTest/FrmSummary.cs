@@ -19,11 +19,12 @@ namespace KureiBlindTest
         {
             InitializeComponent();
 
-            List<Control> lstControls = new List<Control>
-            {
-                lblTitle, lblSummaryCategory, lblSummaryDifficulty
-            };
-            styles.LoadStyle(lstControls, this.ClientSize.Width);
+            styles.CustomizeButton(btnStart);
+            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            styles.LoadCustomFont(lblSummaryDifficulty, 20f, styles.ColorFont);
+            styles.LoadCustomFont(lblSummaryCategory, 20f, styles.ColorFont);
+
+
             this.BackColor = styles.ColorBack;
 
             lblSummaryCategory.Text = "Category : " + Properties.Settings.Default.Category;
@@ -38,6 +39,26 @@ namespace KureiBlindTest
             {
                 Application.Exit();
             }
+        }
+
+        private void pbxGoBack_Click(object sender, EventArgs e)
+        {
+            isUserClosing = true;
+
+            this.Close();
+
+            FrmChoiceDifficulty frmChoiceDifficulty = new FrmChoiceDifficulty();
+            frmChoiceDifficulty.ShowDialog();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            isUserClosing = true;
+
+            this.Close();
+
+            frmHome frmHome = new frmHome();
+            frmHome.ShowDialog();
         }
     }
 }

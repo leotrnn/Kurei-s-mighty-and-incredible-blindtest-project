@@ -19,18 +19,13 @@ namespace KureiBlindTest
         {
             InitializeComponent();
 
-            List<Control> lstControls = new List<Control>
-            {
-                lblTitle
-            };
+            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            styles.CenterControl(lblTitle, this.ClientSize.Width);
+            styles.CustomizeChoice(btnEasy);
+            styles.CustomizeChoice(btnMedium);
+            styles.CustomizeChoice(btnHard);
 
-            List<Control> lstChoices = new List<Control>
-            {
-                btnEasy, btnMedium, btnHard
-            };
 
-            styles.LoadChoices(lstChoices, this.ClientSize.Width);
-            styles.LoadStyle(lstControls, this.ClientSize.Width);
             this.BackColor = styles.ColorBack;
             btnEasy.ForeColor = Color.Green;
             btnMedium.ForeColor = Color.Yellow;

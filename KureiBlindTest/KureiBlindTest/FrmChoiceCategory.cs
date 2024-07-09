@@ -15,18 +15,11 @@ namespace KureiBlindTest
         {
             InitializeComponent();
 
-            List<Control> lstControls = new List<Control>
-            {
-                lblTitle
-            };
+            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            styles.CenterControl(lblTitle, this.ClientSize.Width);
+            styles.CustomizeChoice(btnArtists);
+            styles.CustomizeChoice(btnGenres);
 
-            List<Control> lstChoices = new List<Control>
-            {
-                btnArtists, btnGenres
-            };
-
-            styles.LoadChoices(lstChoices, this.ClientSize.Width);
-            styles.LoadStyle(lstControls, this.ClientSize.Width);
             this.BackColor = styles.ColorBack;
 
             this.FormClosing += FrmChoiceCategory_FormClosing;

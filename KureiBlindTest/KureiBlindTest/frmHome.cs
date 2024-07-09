@@ -22,7 +22,16 @@ namespace KureiBlindTest
             {
                 pbxLogo, lblTitle, btnPlay, btnQuit
             };
-            styles.LoadStyle(lstControls, this.ClientSize.Width);
+
+            foreach(Control c in lstControls)
+            {
+                styles.CenterControl(c, this.ClientSize.Width);
+            }
+
+            styles.CustomizeButton(btnPlay);
+            styles.CustomizeButton(btnQuit);
+            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+
             this.BackColor = styles.ColorBack;
         }
 
