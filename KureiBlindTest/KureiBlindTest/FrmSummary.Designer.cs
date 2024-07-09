@@ -103,6 +103,7 @@
             this.Name = "FrmSummary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmSummary";
+            this.Load += new System.EventHandler(this.FrmSummary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxGoBack)).EndInit();
             this.ResumeLayout(false);
 

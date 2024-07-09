@@ -18,7 +18,11 @@ namespace KureiBlindTest
         public FrmChoiceDifficulty()
         {
             InitializeComponent();
+            this.FormClosing += FrmChoiceCategory_FormClosing;
+        }
 
+        private void FrmChoiceDifficulty_Load(object sender, EventArgs e)
+        {
             styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
             styles.CenterControl(lblTitle, this.ClientSize.Width);
             styles.CustomizeChoice(btnEasy);
@@ -30,8 +34,6 @@ namespace KureiBlindTest
             btnEasy.ForeColor = Color.Green;
             btnMedium.ForeColor = Color.Yellow;
             btnHard.ForeColor = Color.Red;
-
-            this.FormClosing += FrmChoiceCategory_FormClosing;
         }
 
         private void pbxGoBack_Click(object sender, EventArgs e)
@@ -96,5 +98,7 @@ namespace KureiBlindTest
 
             frmSummary.ShowDialog();
         }
+
+        
     }
 }

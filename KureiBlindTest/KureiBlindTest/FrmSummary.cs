@@ -18,19 +18,20 @@ namespace KureiBlindTest
         public FrmSummary()
         {
             InitializeComponent();
+            this.FormClosing += FrmChoiceCategory_FormClosing;
+        }
 
+        private void FrmSummary_Load(object sender, EventArgs e)
+        {
             styles.CustomizeButton(btnStart);
             styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
             styles.LoadCustomFont(lblSummaryDifficulty, 20f, styles.ColorFont);
             styles.LoadCustomFont(lblSummaryCategory, 20f, styles.ColorFont);
 
-
             this.BackColor = styles.ColorBack;
 
             lblSummaryCategory.Text = "Category : " + Properties.Settings.Default.Category;
             lblSummaryDifficulty.Text = "Difficulty : " + Properties.Settings.Default.Difficulty;
-
-            this.FormClosing += FrmChoiceCategory_FormClosing;
         }
 
         private void FrmChoiceCategory_FormClosing(object sender, FormClosingEventArgs e)
@@ -60,5 +61,7 @@ namespace KureiBlindTest
             frmHome frmHome = new frmHome();
             frmHome.ShowDialog();
         }
+
+     
     }
 }

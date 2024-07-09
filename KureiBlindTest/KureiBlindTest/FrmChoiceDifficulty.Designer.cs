@@ -154,6 +154,7 @@
             this.Name = "FrmChoiceDifficulty";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kurei\'s Blind test - Category choice";
+            this.Load += new System.EventHandler(this.FrmChoiceDifficulty_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxHard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxMedium)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxEasy)).EndInit();

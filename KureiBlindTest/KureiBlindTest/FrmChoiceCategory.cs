@@ -14,15 +14,17 @@ namespace KureiBlindTest
         public FrmChoiceCategory()
         {
             InitializeComponent();
+            this.FormClosing += FrmChoiceCategory_FormClosing;
+        }
 
+        private void FrmChoiceCategory_Load(object sender, EventArgs e)
+        {
             styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
             styles.CenterControl(lblTitle, this.ClientSize.Width);
             styles.CustomizeChoice(btnArtists);
             styles.CustomizeChoice(btnGenres);
 
             this.BackColor = styles.ColorBack;
-
-            this.FormClosing += FrmChoiceCategory_FormClosing;
         }
 
         private void pbxGoBack_Click(object sender, EventArgs e)
@@ -77,5 +79,7 @@ namespace KureiBlindTest
             frmChoice.ShowDialog();
 
         }
+
+        
     }
 }

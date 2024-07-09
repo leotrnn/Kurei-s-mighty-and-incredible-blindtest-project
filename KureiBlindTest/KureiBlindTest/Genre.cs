@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KureiBlindTest
 {
-    internal class Genre
+    public class Genre
     {
         // Champs
         private int _idGenre;
