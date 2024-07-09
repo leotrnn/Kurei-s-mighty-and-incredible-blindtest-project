@@ -33,7 +33,6 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.playButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,23 +76,12 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // playButton
-            // 
-            this.playButton.Location = new System.Drawing.Point(119, 594);
-            this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(75, 23);
-            this.playButton.TabIndex = 4;
-            this.playButton.Text = "button1";
-            this.playButton.UseVisualStyleBackColor = true;
-            this.playButton.Click += new System.EventHandler(this.playButton_Click);
-            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(614, 640);
-            this.Controls.Add(this.playButton);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblTitle);
@@ -116,7 +104,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnQuit;
-        private System.Windows.Forms.Button playButton;
     }
 }
 

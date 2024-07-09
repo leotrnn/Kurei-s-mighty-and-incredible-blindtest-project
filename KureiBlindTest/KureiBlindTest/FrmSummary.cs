@@ -54,12 +54,7 @@ namespace KureiBlindTest
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            isUserClosing = true;
-
-            this.Close();
-
-            frmHome frmHome = new frmHome();
-            frmHome.ShowDialog();
+        
         }
 
      
