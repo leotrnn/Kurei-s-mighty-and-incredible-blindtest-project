@@ -73,6 +73,8 @@ namespace KureiBlindTest
         {
             lblRemainingPlays.Text = $"Remaining plays : {RemainingPlays}";
             lblTitle.Text = $"Round N°{Nround}";
+            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            styles.LoadCustomFont(lblRemainingPlays, 20f, styles.ColorFont);
         }
 
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
@@ -89,8 +91,7 @@ namespace KureiBlindTest
             this.BackColor = styles.ColorBack;
             styles.CenterControl(lblTitle, this.ClientSize.Width);
             styles.CenterControl(pbxLogo, this.ClientSize.Width);
-            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
-            styles.LoadCustomFont(lblRemainingPlays, 20f, styles.ColorFont);
+            
         }
 
         public List<Song> SelectAllSongs()
