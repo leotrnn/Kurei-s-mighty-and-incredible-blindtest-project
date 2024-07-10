@@ -1,14 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using YoutubeExplode;
-using YoutubeExplode.Videos.Streams;
-using NAudio.Wave;
-using MySql.Data.MySqlClient;
-using System.Configuration;
-using System.Data;
 
 namespace KureiBlindTest
 {
@@ -50,9 +42,12 @@ namespace KureiBlindTest
             this.Hide();
 
             FrmChoiceCategory frmChoice = new FrmChoiceCategory();
-
-            frmChoice.ShowDialog();
+            Program.FormStack.Push(frmChoice);
+            frmChoice.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
+            frmChoice.FormClosed += (s, args) => this.Show();
+            frmChoice.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
         }
+
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -62,6 +57,5 @@ namespace KureiBlindTest
                 Application.Exit();
             }
         }
-
     }
 }

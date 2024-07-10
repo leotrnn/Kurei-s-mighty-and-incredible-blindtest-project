@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KureiBlindTest
@@ -14,11 +6,11 @@ namespace KureiBlindTest
     public partial class FrmSummary : Form
     {
         Styles styles = new Styles();
-        private bool isUserClosing = false;
+
         public FrmSummary()
         {
             InitializeComponent();
-            this.FormClosing += FrmChoiceCategory_FormClosing;
+            this.FormClosing += FrmSummary_FormClosing;
         }
 
         private void FrmSummary_Load(object sender, EventArgs e)
@@ -34,9 +26,9 @@ namespace KureiBlindTest
             lblSummaryDifficulty.Text = "Difficulty : " + Properties.Settings.Default.Difficulty;
         }
 
-        private void FrmChoiceCategory_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmSummary_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isUserClosing && e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && Program.FormStack.Count == 1)
             {
                 Application.Exit();
             }
@@ -44,19 +36,30 @@ namespace KureiBlindTest
 
         private void pbxGoBack_Click(object sender, EventArgs e)
         {
-            isUserClosing = true;
+            Console.WriteLine(Program.FormStack.Count);
+            if (Program.FormStack.Count > 1)
+            {
+                Form currentForm = Program.FormStack.Pop();
+                currentForm.Hide(); // Cache le formulaire courant avant de le supprimer de la pile
 
-            this.Close();
-
-            FrmChoiceDifficulty frmChoiceDifficulty = new FrmChoiceDifficulty();
-            frmChoiceDifficulty.ShowDialog();
+                Form previousForm = Program.FormStack.Peek();
+                previousForm.Show(); // Affiche le formulaire précédent
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-        
+            this.Hide();
+
+            FrmGame frmGame = new FrmGame();
+            frmGame.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
+            frmGame.FormClosed += (s, args) => Application.Exit();
+            frmGame.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
         }
 
-     
     }
 }

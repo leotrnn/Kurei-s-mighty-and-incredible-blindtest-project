@@ -13,7 +13,6 @@ namespace KureiBlindTest
     public partial class FrmChoiceDifficulty : Form
     {
         Styles styles = new Styles();
-        private bool isUserClosing = false;
 
         public FrmChoiceDifficulty()
         {
@@ -36,19 +35,11 @@ namespace KureiBlindTest
             btnHard.ForeColor = Color.Red;
         }
 
-        private void pbxGoBack_Click(object sender, EventArgs e)
-        {
-            isUserClosing = true;
-
-            this.Close();
-
-            FrmChoiceCategory frmChoice = new FrmChoiceCategory();
-            frmChoice.ShowDialog();
-        }
+     
 
         private void FrmChoiceCategory_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isUserClosing && e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && Program.FormStack.Count == 1)
             {
                 Application.Exit();
             }
@@ -66,6 +57,23 @@ namespace KureiBlindTest
             }
         }
 
+        private void pbxGoBack_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(Program.FormStack.Count);
+            if (Program.FormStack.Count > 1)
+            {
+                Form currentForm = Program.FormStack.Pop();
+                currentForm.Hide(); // Cache le formulaire courant avant de le supprimer de la pile
+
+                Form previousForm = Program.FormStack.Peek();
+                previousForm.Show(); // Affiche le formulaire précédent
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
+
         private void btnEasy_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Difficulty = "Easy";
@@ -73,8 +81,10 @@ namespace KureiBlindTest
             this.Hide();
 
             FrmSummary frmSummary = new FrmSummary();
-
-            frmSummary.ShowDialog();
+            Program.FormStack.Push(frmSummary);
+            frmSummary.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
+            frmSummary.FormClosed += (s, args) => this.Show();
+            frmSummary.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
         }
 
         private void btnMedium_Click(object sender, EventArgs e)
@@ -84,8 +94,10 @@ namespace KureiBlindTest
             this.Hide();
 
             FrmSummary frmSummary = new FrmSummary();
-
-            frmSummary.ShowDialog();
+            Program.FormStack.Push(frmSummary);
+            frmSummary.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
+            frmSummary.FormClosed += (s, args) => this.Show();
+            frmSummary.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
         }
 
         private void btnHard_Click(object sender, EventArgs e)
@@ -95,10 +107,13 @@ namespace KureiBlindTest
             this.Hide();
 
             FrmSummary frmSummary = new FrmSummary();
-
-            frmSummary.ShowDialog();
+            Program.FormStack.Push(frmSummary);
+            frmSummary.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
+            frmSummary.FormClosed += (s, args) => this.Show();
+            frmSummary.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
         }
 
-        
+
+
     }
 }
