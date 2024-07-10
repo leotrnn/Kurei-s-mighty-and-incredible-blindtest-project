@@ -29,20 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGame));
-            this.pbxLogo = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbxLogo
-            // 
-            this.pbxLogo.Image = global::KureiBlindTest.Properties.Resources.logo;
-            this.pbxLogo.Location = new System.Drawing.Point(430, 146);
-            this.pbxLogo.Name = "pbxLogo";
-            this.pbxLogo.Size = new System.Drawing.Size(200, 200);
-            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxLogo.TabIndex = 0;
-            this.pbxLogo.TabStop = false;
             // 
             // lblTitle
             // 
@@ -53,6 +43,17 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Kurei\'s Blind test";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbxLogo
+            // 
+            this.pbxLogo.Image = global::KureiBlindTest.Properties.Resources.play1;
+            this.pbxLogo.Location = new System.Drawing.Point(430, 146);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(200, 200);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxLogo.TabIndex = 0;
+            this.pbxLogo.TabStop = false;
+            this.pbxLogo.Click += new System.EventHandler(this.pbxLogo_Click);
             // 
             // FrmGame
             // 
