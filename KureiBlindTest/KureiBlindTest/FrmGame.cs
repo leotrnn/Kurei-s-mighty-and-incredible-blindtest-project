@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using YoutubeExplode;
 using YoutubeExplode.Videos.Streams;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace KureiBlindTest
 {
@@ -16,6 +17,7 @@ namespace KureiBlindTest
     {
         Styles styles = new Styles();
         private int _nround;
+        private int _remainingPlays;
         private bool isPlaying = false;
         private WaveOutEvent waveOut; // Pour gérer la lecture audio avec NAudio
         private float volume = 0.1f; // Niveau de volume initial (1.0 = 100%)
@@ -23,10 +25,12 @@ namespace KureiBlindTest
         private TimeSpan startPosition; // Position de départ aléatoire de l'extrait
 
         public int Nround { get => _nround; set => _nround = value; }
+        public int RemainingPlays { get => _remainingPlays; set => _remainingPlays = value; }
 
         public FrmGame()
         {
             Nround = 1;
+            RemainingPlays = 3;
             InitializeComponent();
             this.FormClosing += FrmGame_FormClosing;
             this.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
@@ -48,10 +52,26 @@ namespace KureiBlindTest
                 var youtubeLink = selectedSong.LinkYoutube;
                 Task.Run(async () => await ChooseRandomStartPosition(youtubeLink));
             }
+
+            switch (Properties.Settings.Default.Difficulty)
+            {
+                case "Easy":
+                    RemainingPlays = 3;
+                    break;
+
+                case "Medium":
+                    RemainingPlays = 2;
+                    break;
+
+                case "Hard":
+                    RemainingPlays = 1;
+                    break;
+            }
         }
 
         public void UpdateUI()
         {
+            lblRemainingPlays.Text = $"Remaining plays : {RemainingPlays}";
             lblTitle.Text = $"Round N°{Nround}";
         }
 
@@ -70,6 +90,7 @@ namespace KureiBlindTest
             styles.CenterControl(lblTitle, this.ClientSize.Width);
             styles.CenterControl(pbxLogo, this.ClientSize.Width);
             styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            styles.LoadCustomFont(lblRemainingPlays, 20f, styles.ColorFont);
         }
 
         public List<Song> SelectAllSongs()
@@ -254,20 +275,26 @@ namespace KureiBlindTest
 
         private void pbxLogo_Click(object sender, EventArgs e)
         {
-            // Alterne entre play et pause
-            if (!isPlaying)
+            if (RemainingPlays > 0)
             {
-                pbxLogo.Image = Properties.Resources.pause;
-                string youtubeLink = selectedSong.LinkYoutube;
-                Task.Run(async () => await PlayAudioFromYoutube(youtubeLink));
-            }
-            else
-            {
-                pbxLogo.Image = Properties.Resources.play;
-                waveOut.Stop(); // Arrête la lecture audio avec NAudio
-            }
 
-            isPlaying = !isPlaying;
+                // Alterne entre play et pause
+                if (!isPlaying)
+                {
+                    RemainingPlays -= 1;
+                    pbxLogo.Image = Properties.Resources.pause;
+                    string youtubeLink = selectedSong.LinkYoutube;
+                    Task.Run(async () => await PlayAudioFromYoutube(youtubeLink));
+                }
+                else
+                {
+                    pbxLogo.Image = Properties.Resources.play;
+                    waveOut.Stop(); // Arrête la lecture audio avec NAudio
+                }
+
+                isPlaying = !isPlaying;
+                UpdateUI();
+            }
         }
 
         private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)

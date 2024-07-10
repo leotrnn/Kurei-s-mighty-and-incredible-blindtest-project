@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGame));
             this.lblTitle = new System.Windows.Forms.Label();
             this.pbxLogo = new System.Windows.Forms.PictureBox();
+            this.lblRemainingPlays = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,12 +56,23 @@
             this.pbxLogo.TabStop = false;
             this.pbxLogo.Click += new System.EventHandler(this.pbxLogo_Click);
             // 
+            // lblRemainingPlays
+            // 
+            this.lblRemainingPlays.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRemainingPlays.Location = new System.Drawing.Point(12, 349);
+            this.lblRemainingPlays.Name = "lblRemainingPlays";
+            this.lblRemainingPlays.Size = new System.Drawing.Size(1033, 80);
+            this.lblRemainingPlays.TabIndex = 3;
+            this.lblRemainingPlays.Text = "Remaining plays";
+            this.lblRemainingPlays.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1057, 702);
+            this.Controls.Add(this.lblRemainingPlays);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pbxLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -79,5 +91,6 @@
 
         private System.Windows.Forms.PictureBox pbxLogo;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblRemainingPlays;
     }
 }
