@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmChoiceDifficulty));
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnEasy = new System.Windows.Forms.Button();
             this.btnMedium = new System.Windows.Forms.Button();
@@ -151,6 +152,7 @@
             this.Controls.Add(this.pbxGoBack);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmChoiceDifficulty";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kurei\'s Blind test - Category choice";

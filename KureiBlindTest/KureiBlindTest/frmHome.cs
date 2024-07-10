@@ -44,7 +44,6 @@ namespace KureiBlindTest
             FrmChoiceCategory frmChoice = new FrmChoiceCategory();
             Program.FormStack.Push(frmChoice);
             frmChoice.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
-            frmChoice.FormClosed += (s, args) => this.Show();
             frmChoice.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
         }
 
