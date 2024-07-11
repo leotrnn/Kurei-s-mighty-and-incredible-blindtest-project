@@ -17,14 +17,15 @@ namespace KureiBlindTest
         }
 
         private void FrmChoiceCategory_Load(object sender, EventArgs e)
-        {            
+        {
+           
         }      
 
         private void btnGenres_Paint(object sender, PaintEventArgs e)
         {
             Button btn = sender as Button;
             int borderWidth = 2;
-            Color borderColor = Color.Red;//styles.ColorFont;
+            Color borderColor = styles.ColorFont;
 
             using (Pen pen = new Pen(borderColor, borderWidth))
             {

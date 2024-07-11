@@ -7,6 +7,7 @@ namespace KureiBlindTest
     public partial class frmHome : Form
     {
         private NavigationService navigationService;
+        Styles styles = new Styles();
 
         public frmHome()
         {
@@ -20,10 +21,6 @@ namespace KureiBlindTest
 
         private void frmHome_Load(object sender, EventArgs e)
         {
-            List<Control> lstControls = new List<Control>
-            {
-                pbxLogo, lblTitle, btnPlay, btnQuit
-            };
         }
 
         private void btnQuit_Click(object sender, EventArgs e)

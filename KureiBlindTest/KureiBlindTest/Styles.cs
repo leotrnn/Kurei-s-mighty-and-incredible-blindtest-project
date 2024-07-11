@@ -23,6 +23,7 @@ namespace KureiBlindTest
         public Color ColorBack { get => colorBack; set => colorBack = value; }
         public Color ColorFont { get => colorFont; set => colorFont = value; }
         public Color ColorThird { get => colorThird; set => colorThird = value; }
+        public Color ColorFourth { get => colorFourth; set => colorFourth = value; }
 
         // Constructeur
         public Styles()
@@ -40,7 +41,7 @@ namespace KureiBlindTest
 
         public void CustomizeChoice(Button btn)
         {
-            this.LoadCustomFont(btn, 20f, colorFont);
+           //this.LoadCustomFont(btn, 20f, colorFont);
             btn.BackColor = colorBack;
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
@@ -53,26 +54,7 @@ namespace KureiBlindTest
             btn.BackColor = colorFont;
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
-            this.LoadCustomFont(btn, 22f, colorBack);
-        }
-
-        public void LoadCustomFont(Control objectToCustom, float sizeFont, Color colorFont)
-        {
-            try
-            {
-                string cheminPolice = Path.Combine(Application.StartupPath, "fonts", "Outfit-Bold.ttf");
-                PrivateFontCollection pfc = new PrivateFontCollection();
-                pfc.AddFontFile(cheminPolice);
-
-                Font policeCustom = new Font(pfc.Families[0], sizeFont, FontStyle.Regular);
-
-                objectToCustom.Font = policeCustom;
-                objectToCustom.ForeColor = colorFont;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur lors du chargement de la police personnalisée : " + ex.Message);
-            }
+            //this.LoadCustomFont(btn, 22f, colorBack);
         }
     }
 }

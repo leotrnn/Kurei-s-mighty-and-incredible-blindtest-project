@@ -23,20 +23,18 @@ namespace KureiBlindTest
 
         private void FrmChoiceDifficulty_Load(object sender, EventArgs e)
         {
-            btnEasy.ForeColor = Color.Green;
-            btnMedium.ForeColor = Color.Yellow;
-            btnHard.ForeColor = Color.Red;
+            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            styles.CustomizeChoice(btnEasy);
+            styles.CustomizeChoice(btnMedium);
+            styles.CustomizeChoice(btnHard);
+
         }
-
-     
-
-       
 
         private void btnEasy_Paint(object sender, PaintEventArgs e)
         {
             Button btn = sender as Button;
             int borderWidth = 2;
-            Color borderColor = Color.Red; //styles.ColorFont;
+            Color borderColor = styles.ColorFont;
 
             using (Pen pen = new Pen(borderColor, borderWidth))
             {

@@ -43,6 +43,7 @@ namespace KureiBlindTest
             RemainingPlays = 0;
             score = 0;
 
+          
         }
 
         public void UpdateUI()
