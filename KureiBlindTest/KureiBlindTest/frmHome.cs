@@ -22,14 +22,14 @@ namespace KureiBlindTest
 
             foreach (Control c in lstControls)
             {
-                styles.CenterControl(c, this.ClientSize.Width);
+                //styles.CenterControl(c, this.ClientSize.Width);
             }
 
-            styles.CustomizeButton(btnPlay);
-            styles.CustomizeButton(btnQuit);
-            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
+            ////styles.CustomizeButton(btnPlay);
+            ////styles.CustomizeButton(btnQuit);
+            ////styles.LoadCustomFont(lblTitle, 32f, //styles.ColorFont);
 
-            this.BackColor = styles.ColorBack;
+            //this.BackColor = //styles.ColorBack;
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -37,25 +37,13 @@ namespace KureiBlindTest
             Application.Exit();
         }
 
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            FrmChoiceCategory frmChoice = new FrmChoiceCategory();
-            Program.FormStack.Push(frmChoice);
-            frmChoice.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
-            frmChoice.ShowDialog(this); // Utiliser ShowDialog avec le parent défini
+          
         }
 
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                Application.Exit();
-            }
-        }
+      
     }
 }
- 

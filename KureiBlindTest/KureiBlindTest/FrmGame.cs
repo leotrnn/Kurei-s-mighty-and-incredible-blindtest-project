@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YoutubeExplode;
@@ -27,70 +29,46 @@ namespace KureiBlindTest
         public int Nround { get => _nround; set => _nround = value; }
         public int RemainingPlays { get => _remainingPlays; set => _remainingPlays = value; }
 
+        Song answerChosed;
+        Song realAnswer;
+        int score = 0;
+
         public FrmGame()
         {
             Nround = 1;
             RemainingPlays = 3;
             InitializeComponent();
-            this.FormClosing += FrmGame_FormClosing;
             this.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
 
-            // Initialisation de WaveOutEvent pour la lecture audio
-            waveOut = new WaveOutEvent();
-            waveOut.PlaybackStopped += WaveOut_PlaybackStopped; // Abonnez-vous à l'événement PlaybackStopped
 
-            // Charger toutes les chansons une fois au chargement du formulaire
-            List<Song> allSongs = SelectAllSongs();
-            if (allSongs.Count > 0)
-            {
-                // Choisissez une chanson au hasard au départ
-                Random random = new Random();
-                int randomIndex = random.Next(0, allSongs.Count);
-                selectedSong = allSongs[randomIndex];
 
-                // Choisissez un extrait aléatoire de cette chanson
-                var youtubeLink = selectedSong.LinkYoutube;
-                Task.Run(async () => await ChooseRandomStartPosition(youtubeLink));
-            }
-
-            switch (Properties.Settings.Default.Difficulty)
-            {
-                case "Easy":
-                    RemainingPlays = 3;
-                    break;
-
-                case "Medium":
-                    RemainingPlays = 2;
-                    break;
-
-                case "Hard":
-                    RemainingPlays = 1;
-                    break;
-            }
+            
         }
 
         public void UpdateUI()
         {
             lblRemainingPlays.Text = $"Remaining plays : {RemainingPlays}";
             lblTitle.Text = $"Round N°{Nround}";
-            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
-            styles.LoadCustomFont(lblRemainingPlays, 20f, styles.ColorFont);
+            //styles.LoadCustomFont(lblTitle, 32f, //styles.ColorFont);
+            //styles.LoadCustomFont(lblRemainingPlays, 20f, //styles.ColorFont);
+            //styles.CustomizeButton(btnOption1);
+            //styles.CustomizeButton(btnOption2);
+            //styles.CustomizeButton(btnOption3);
+            //styles.CustomizeButton(btnOption4);
         }
 
-        private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                Application.Exit();
-            }
-        }
+       
+
+      
+
 
         private void FrmGame_Load(object sender, EventArgs e)
         {
+            this.newRound();
             UpdateUI();
-            this.BackColor = styles.ColorBack;
-            styles.CenterControl(lblTitle, this.ClientSize.Width);
-            styles.CenterControl(pbxLogo, this.ClientSize.Width);
+            //this.BackColor = //styles.ColorBack;
+            //styles.CenterControl(lblTitle, this.ClientSize.Width);
+            //styles.CenterControl(pbxLogo, this.ClientSize.Width);
             
         }
 
@@ -300,26 +278,118 @@ namespace KureiBlindTest
 
         private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
         {
-            // Lorsque la lecture s'arrête, revenez à l'icône "Play"
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.BeginInvoke((MethodInvoker)delegate ()
+                Invoke((Action)(() => WaveOut_PlaybackStopped(sender, e)));
+                return;
+            }
+
+            pbxLogo.Image = Properties.Resources.play;
+            isPlaying = false;
+        }
+
+
+       
+
+        public void newRound()
+        {
+            UpdateUI();
+
+            // Initialisation de WaveOutEvent pour la lecture audio
+            waveOut = new WaveOutEvent();
+            waveOut.PlaybackStopped += WaveOut_PlaybackStopped; // Abonnez-vous à l'événement PlaybackStopped
+
+            // Charger toutes les chansons une fois au chargement du formulaire
+            List<Song> allSongs = SelectAllSongs();
+            if (allSongs.Count > 0)
+            {
+                // Choisissez une chanson au hasard au départ
+                Random random = new Random();
+                int randomIndex = random.Next(0, allSongs.Count);
+                selectedSong = allSongs[randomIndex];
+                realAnswer = allSongs[randomIndex];
+
+                // Choisissez un extrait aléatoire de cette chanson
+                var youtubeLink = selectedSong.LinkYoutube;
+                Task.Run(async () => await ChooseRandomStartPosition(youtubeLink));
+            }
+
+            switch (Properties.Settings.Default.Difficulty)
+            {
+                case "Easy":
+                    RemainingPlays = 3;
+                    break;
+
+                case "Medium":
+                    RemainingPlays = 2;
+                    break;
+
+                case "Hard":
+                    RemainingPlays = 1;
+                    break;
+            }
+
+            List<Song> lstSong = this.SelectAllSongs();
+            List<Control> lstAnswers = new List<Control> { btnOption1, btnOption2, btnOption3, btnOption4 };
+            Random rng = new Random();
+            lstSong = lstSong.OrderBy(a => rng.Next()).ToList();
+            bool isTheCorrectAnswer;
+
+            if (realAnswer != null) {
+                for (int i = 0; i < lstAnswers.Count; i++)
                 {
-                    pbxLogo.Image = Properties.Resources.play;
-                });
+                    lstAnswers[i].Enabled = true;
+                    lstAnswers[i].Text = $"{lstSong[i].ArtistSong} - {lstSong[i].NameSong}";
+                    isTheCorrectAnswer = (realAnswer.NameSong == lstSong[i].NameSong);
+                    lstAnswers[i].Tag = (isTheCorrectAnswer, lstSong[i]);
+                }
             }
             else
             {
-                pbxLogo.Image = Properties.Resources.play;
+                for (int i = 0; i < lstAnswers.Count; i++)
+                {
+                    lstAnswers[i].Enabled = false;
+                 
+                }
+            }
+        }
+
+        private void btnOption1_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            var tagTuple = ((bool, Song))btn.Tag;
+
+            // Extraire les éléments du ValueTuple
+            bool isTheCorrectAnswer = tagTuple.Item1;
+            Song song = tagTuple.Item2;
+
+
+            // Utiliser isTheCorrectAnswer et song
+            if (isTheCorrectAnswer)
+            {
+                score += 1;
+                lblInfo.Text = $"Correct";
+                //styles.LoadCustomFont(lblInfo, 20f, Color.Green);
+            }
+            else
+            {
+                lblInfo.Text = $"Incorrect, answer was {song.NameSong}";
+                //styles.LoadCustomFont(lblInfo, 20f, Color.Red);
             }
 
-            isPlaying = false;
+            this.newRound();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            waveOut.Dispose(); // Libère les ressources NAudio
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+                waveOut.Dispose();
+            }
         }
     }
+
+   
 }
