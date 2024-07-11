@@ -8,25 +8,17 @@ namespace KureiBlindTest
     public partial class FrmChoiceCategory : Form
     {
         Styles styles = new Styles();
+        private NavigationService navigationService;
 
-        public FrmChoiceCategory()
+        public FrmChoiceCategory(NavigationService navService)
         {
             InitializeComponent();
+            navigationService = navService;
         }
 
         private void FrmChoiceCategory_Load(object sender, EventArgs e)
-        {
-            //styles.LoadCustomFont(lblTitle, 32f, //styles.ColorFont);
-            //styles.CenterControl(lblTitle, this.ClientSize.Width);
-            //styles.CustomizeChoice(btnArtists);
-            //styles.CustomizeChoice(btnGenres);
-
-            //this.BackColor = //styles.ColorBack;
-        }
-
-      
-
-      
+        {            
+        }      
 
         private void btnGenres_Paint(object sender, PaintEventArgs e)
         {
@@ -42,22 +34,22 @@ namespace KureiBlindTest
 
         private void pbxGoBack_Click(object sender, EventArgs e)
         {
+            navigationService.ResetToHome(); // Reset the navigation stack
+            navigationService.NavigateBack();
         }
-
-
 
         private void btnGenres_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Category = "Genres";
-
-        
+            FrmChoiceDifficulty difficultyForm = new FrmChoiceDifficulty(navigationService);
+            navigationService.NavigateTo(difficultyForm);
         }
 
         private void btnArtists_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Category = "Artists";
-
-          
+            FrmChoiceDifficulty difficultyForm = new FrmChoiceDifficulty(navigationService);
+            navigationService.NavigateTo(difficultyForm);
         }
 
 

@@ -17,59 +17,48 @@ namespace KureiBlindTest
 {
     public partial class FrmGame : Form
     {
+        private NavigationService navigationService;
+
         Styles styles = new Styles();
         private int _nround;
         private int _remainingPlays;
         private bool isPlaying = false;
-        private WaveOutEvent waveOut; // Pour gérer la lecture audio avec NAudio
-        private float volume = 0.1f; // Niveau de volume initial (1.0 = 100%)
-        private Song selectedSong; // Chanson choisie au départ
-        private TimeSpan startPosition; // Position de départ aléatoire de l'extrait
+        private WaveOutEvent waveOut;
+        private float volume = 0.1f;
+        private Song selectedSong;
+        private TimeSpan startPosition;
 
         public int Nround { get => _nround; set => _nround = value; }
         public int RemainingPlays { get => _remainingPlays; set => _remainingPlays = value; }
 
         Song answerChosed;
         Song realAnswer;
-        int score = 0;
+        int score;
 
-        public FrmGame()
+        public FrmGame(NavigationService navService)
         {
-            Nround = 1;
-            RemainingPlays = 3;
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterParent; // Centrer par rapport au parent
+            navigationService = navService;
+            Nround = 0;
+            RemainingPlays = 0;
+            score = 0;
 
-
-
-            
         }
 
         public void UpdateUI()
         {
             lblRemainingPlays.Text = $"Remaining plays : {RemainingPlays}";
             lblTitle.Text = $"Round N°{Nround}";
-            //styles.LoadCustomFont(lblTitle, 32f, //styles.ColorFont);
-            //styles.LoadCustomFont(lblRemainingPlays, 20f, //styles.ColorFont);
-            //styles.CustomizeButton(btnOption1);
-            //styles.CustomizeButton(btnOption2);
-            //styles.CustomizeButton(btnOption3);
-            //styles.CustomizeButton(btnOption4);
+            if(Nround-1 != 0)
+            {
+                lblScore.Text = $"Score : {score}/{Nround - 1}";
+            }
         }
-
-       
-
-      
-
 
         private void FrmGame_Load(object sender, EventArgs e)
         {
             this.newRound();
             UpdateUI();
-            //this.BackColor = //styles.ColorBack;
-            //styles.CenterControl(lblTitle, this.ClientSize.Width);
-            //styles.CenterControl(pbxLogo, this.ClientSize.Width);
-            
         }
 
         public List<Song> SelectAllSongs()
@@ -289,10 +278,34 @@ namespace KureiBlindTest
         }
 
 
-       
+
 
         public void newRound()
         {
+            Nround += 1;
+            switch (Properties.Settings.Default.Difficulty)
+            {
+                case "Easy":
+                    RemainingPlays = 3;
+                    break;
+
+                case "Medium":
+                    RemainingPlays = 2;
+                    break;
+
+                case "Hard":
+                    RemainingPlays = 1;
+                    break;
+            }
+
+            // Stop the currently playing music
+            if (waveOut != null && isPlaying)
+            {
+                waveOut.Stop();
+                pbxLogo.Image = Properties.Resources.pause; // Change the image to pause
+                isPlaying = false; // Update the isPlaying flag
+            }
+
             UpdateUI();
 
             // Initialisation de WaveOutEvent pour la lecture audio
@@ -314,20 +327,7 @@ namespace KureiBlindTest
                 Task.Run(async () => await ChooseRandomStartPosition(youtubeLink));
             }
 
-            switch (Properties.Settings.Default.Difficulty)
-            {
-                case "Easy":
-                    RemainingPlays = 3;
-                    break;
-
-                case "Medium":
-                    RemainingPlays = 2;
-                    break;
-
-                case "Hard":
-                    RemainingPlays = 1;
-                    break;
-            }
+            
 
             List<Song> lstSong = this.SelectAllSongs();
             List<Control> lstAnswers = new List<Control> { btnOption1, btnOption2, btnOption3, btnOption4 };
@@ -335,7 +335,8 @@ namespace KureiBlindTest
             lstSong = lstSong.OrderBy(a => rng.Next()).ToList();
             bool isTheCorrectAnswer;
 
-            if (realAnswer != null) {
+            if (realAnswer != null)
+            {
                 for (int i = 0; i < lstAnswers.Count; i++)
                 {
                     lstAnswers[i].Enabled = true;
@@ -349,10 +350,10 @@ namespace KureiBlindTest
                 for (int i = 0; i < lstAnswers.Count; i++)
                 {
                     lstAnswers[i].Enabled = false;
-                 
                 }
             }
         }
+
 
         private void btnOption1_Click(object sender, EventArgs e)
         {

@@ -8,20 +8,17 @@ namespace KureiBlindTest
     public partial class FrmSummary : Form
     {
         Styles styles = new Styles();
+        private NavigationService navigationService;
 
-        public FrmSummary()
+        public FrmSummary(NavigationService navService)
         {
             InitializeComponent();
+            navigationService = navService; 
         }
 
         private void FrmSummary_Load(object sender, EventArgs e)
         {
-           // styles.CustomizeButton(btnStart);
-           // styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
-            //styles.LoadCustomFont(lblSummaryDifficulty, 20f, styles.ColorFont);
-            //styles.LoadCustomFont(lblSummaryCategory, 20f, styles.ColorFont);
-
-            //this.BackColor = styles.ColorBack;
+         
 
             lblSummaryCategory.Text = "Category : " + Properties.Settings.Default.Category;
             lblSummaryDifficulty.Text = "Difficulty : " + Properties.Settings.Default.Difficulty;
@@ -31,11 +28,13 @@ namespace KureiBlindTest
 
         private void pbxGoBack_Click(object sender, EventArgs e)
         {
+            navigationService.NavigateBack();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-         
+            FrmGame gameForm = new FrmGame(navigationService);
+            navigationService.NavigateTo(gameForm);
         }
 
 

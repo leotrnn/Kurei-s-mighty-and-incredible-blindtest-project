@@ -6,11 +6,16 @@ namespace KureiBlindTest
 {
     public partial class frmHome : Form
     {
-        Styles styles = new Styles();
+        private NavigationService navigationService;
 
         public frmHome()
         {
             InitializeComponent();
+        }
+
+        public void SetNavigationService(NavigationService navService)
+        {
+            navigationService = navService;
         }
 
         private void frmHome_Load(object sender, EventArgs e)
@@ -19,17 +24,6 @@ namespace KureiBlindTest
             {
                 pbxLogo, lblTitle, btnPlay, btnQuit
             };
-
-            foreach (Control c in lstControls)
-            {
-                //styles.CenterControl(c, this.ClientSize.Width);
-            }
-
-            ////styles.CustomizeButton(btnPlay);
-            ////styles.CustomizeButton(btnQuit);
-            ////styles.LoadCustomFont(lblTitle, 32f, //styles.ColorFont);
-
-            //this.BackColor = //styles.ColorBack;
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -37,13 +31,11 @@ namespace KureiBlindTest
             Application.Exit();
         }
 
-
         private void btnPlay_Click(object sender, EventArgs e)
         {
-          
+            navigationService.ResetToHome(); // Reset the navigation stack
+            FrmChoiceCategory categoryForm = new FrmChoiceCategory(navigationService);
+            navigationService.NavigateTo(categoryForm);
         }
-
-
-      
     }
 }

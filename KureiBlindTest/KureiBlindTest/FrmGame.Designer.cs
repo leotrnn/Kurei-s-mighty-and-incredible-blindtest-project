@@ -37,6 +37,7 @@
             this.btnOption3 = new System.Windows.Forms.Button();
             this.btnOption4 = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.lblScore = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblTitle.Location = new System.Drawing.Point(12, 30);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(1033, 80);
+            this.lblTitle.Size = new System.Drawing.Size(500, 80);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Kurei\'s Blind test";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,12 +121,22 @@
             this.lblInfo.TabIndex = 8;
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblScore
+            // 
+            this.lblScore.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblScore.Location = new System.Drawing.Point(545, 30);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(500, 80);
+            this.lblScore.TabIndex = 9;
+            this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1057, 702);
+            this.Controls.Add(this.lblScore);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnOption4);
             this.Controls.Add(this.btnOption3);
@@ -155,5 +166,6 @@
         private System.Windows.Forms.Button btnOption3;
         private System.Windows.Forms.Button btnOption4;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lblScore;
     }
 }

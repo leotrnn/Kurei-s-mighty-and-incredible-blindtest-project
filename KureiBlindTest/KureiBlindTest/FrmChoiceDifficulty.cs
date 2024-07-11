@@ -13,22 +13,16 @@ namespace KureiBlindTest
     public partial class FrmChoiceDifficulty : Form
     {
         Styles styles = new Styles();
+        private NavigationService navigationService;
 
-        public FrmChoiceDifficulty()
+        public FrmChoiceDifficulty(NavigationService navService)
         {
             InitializeComponent();
+            navigationService = navService;
         }
 
         private void FrmChoiceDifficulty_Load(object sender, EventArgs e)
         {
-            //styles.LoadCustomFont(lblTitle, 32f, //styles.ColorFont);
-            //styles.CenterControl(lblTitle, this.ClientSize.Width);
-            //styles.CustomizeChoice(btnEasy);
-            //styles.CustomizeChoice(btnMedium);
-            //styles.CustomizeChoice(btnHard);
-
-
-           // this.BackColor = //styles.ColorBack;
             btnEasy.ForeColor = Color.Green;
             btnMedium.ForeColor = Color.Yellow;
             btnHard.ForeColor = Color.Red;
@@ -52,28 +46,30 @@ namespace KureiBlindTest
 
         private void pbxGoBack_Click(object sender, EventArgs e)
         {
-        
-
+            navigationService.NavigateBack();
         }
 
         private void btnEasy_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Difficulty = "Easy";
+            FrmSummary summaryForm = new FrmSummary(navigationService);
+            navigationService.NavigateTo(summaryForm);
 
-        
         }
 
         private void btnMedium_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Difficulty = "Medium";
-
+            FrmSummary summaryForm = new FrmSummary(navigationService);
+            navigationService.NavigateTo(summaryForm);
         }
 
         private void btnHard_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Difficulty = "Hard";
+            FrmSummary summaryForm = new FrmSummary(navigationService);
+            navigationService.NavigateTo(summaryForm);
 
-          
         }
 
 
