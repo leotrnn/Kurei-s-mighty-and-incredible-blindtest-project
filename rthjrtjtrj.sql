@@ -51,10 +51,11 @@ CREATE TABLE `SONGS` (
   `nameSong` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `artistSong` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `idGenre` int NOT NULL,
+  `song` longtext NOT NULL,
   PRIMARY KEY (`idSong`),
   KEY `SONGS_GENRES_FK` (`idGenre`),
   CONSTRAINT `SONGS_GENRES_FK` FOREIGN KEY (`idGenre`) REFERENCES `GENRES` (`idGenre`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +64,7 @@ CREATE TABLE `SONGS` (
 
 LOCK TABLES `SONGS` WRITE;
 /*!40000 ALTER TABLE `SONGS` DISABLE KEYS */;
+INSERT INTO `SONGS` VALUES (1,'Feel Good inc.','Gorillaz',1,'https://youtu.be/ZxVw7bvMd3s?si=AmnBtZ02l2EeVIjr'),(2,'Brianstorm','Arctic Monkeys',1,'https://youtu.be/uR3bNrIg9eE?si=NyVicO-IUH4pMTme'),(15,'Even flow','Pearl Jam',1,'https://youtu.be/tkbgtVFlyCQ?si=2zNGcP6xZxD4tAMd'),(16,'No one knows','Queen of the stone age',1,'https://youtu.be/OM0z2C0sMxI?si=CSgZ8kMF6VDnFcig');
 /*!40000 ALTER TABLE `SONGS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-09  0:03:47
+-- Dump completed on 2024-07-13 16:56:55

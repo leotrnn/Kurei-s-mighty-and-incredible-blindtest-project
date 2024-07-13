@@ -23,11 +23,7 @@ namespace KureiBlindTest
 
         private void FrmChoiceDifficulty_Load(object sender, EventArgs e)
         {
-            styles.LoadCustomFont(lblTitle, 32f, styles.ColorFont);
-            styles.CustomizeChoice(btnEasy);
-            styles.CustomizeChoice(btnMedium);
-            styles.CustomizeChoice(btnHard);
-
+          
         }
 
         private void btnEasy_Paint(object sender, PaintEventArgs e)
