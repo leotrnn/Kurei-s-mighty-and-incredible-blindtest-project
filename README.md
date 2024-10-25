@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/4dd77709-d097-4dfb-bae1-01326a467fa3" alt="logo" width="400">
+    <img src="https://github.com/user-attachments/assets/420e8260-a19c-4e91-a091-7b8aa4c59bd0" alt="logo" width="400">
 </p>
 
 <h1 align="center">Kurei's Mighty and Incredible Blindtest Project</h1>
