@@ -56,7 +56,8 @@ Ininstall-Package YoutubeExplode
 
 <h4>The sample is too short</h4>
 <p>That means that the song is also too short, here's the configurations of the samples length</p>
-<table>
+<p align="center">
+    <table>
     <tr>
         <th>Difficulty</th>
         <th>Length</th>
@@ -74,5 +75,6 @@ Ininstall-Package YoutubeExplode
         <td>1s</td>
     </tr>
 </table>
+</p>
 
 
