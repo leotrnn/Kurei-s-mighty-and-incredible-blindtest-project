@@ -75,7 +75,8 @@ Ininstall-Package YoutubeExplode
     </tr>
 </table>
 <p>Again, can't do much about it, either remove the song or change the samples length in frmGame if you really want the sample to work</p>
-![image](https://github.com/user-attachments/assets/9d54ad02-7f14-461d-8324-60605c0db1b2)
-![image](https://github.com/user-attachments/assets/89c2d61f-8d3c-4530-b3c6-766b31ae9008)
-
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/9d54ad02-7f14-461d-8324-60605c0db1b2" alt="logo" width="400">
+    <img src="https://github.com/user-attachments/assets/89c2d61f-8d3c-4530-b3c6-766b31ae9008" alt="logo" width="400">
+</p>
 
