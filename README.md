@@ -23,7 +23,6 @@
 - **Interactive Tests**: Play a musical blindtest and try to guess the titles and artists.
 - **Result Evaluation**: Get a score at the end of each test to measure your performance.
 - **User-Friendly Interface**: Modern and clean design for smooth navigation.
-- **Frequent Updates**: Regularly add new songs and features.
 
 <h2 align="center">Installation and Usage</h2>
 
