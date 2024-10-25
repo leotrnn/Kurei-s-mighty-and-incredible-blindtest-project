@@ -38,9 +38,10 @@ git clone https://github.com/leotrnn/kureiblindtest.git
 <h3>You can't play a song and this error "Song Unaviable : 'please sign in'" shows ?</h3>
 <p align="justify">In your Visual Studio : Tools -> Manager NugGet package -> Console</p>
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/8ceee8fe-a7fd-45b4-b090-e420e0bd8657" alt="logo" width="600">
+    <img src="https://github.com/user-attachments/assets/ee6ecae1-116a-439d-8f8c-ac6fd7d7e997" alt="logo" width="800">
 </p>
 <p align="justify">Just uninstall and reinstall YoutubeExplode</p>
+
 ```bash
 Uninstall-Package YoutubeExplode
 Ininstall-Package YoutubeExplode
