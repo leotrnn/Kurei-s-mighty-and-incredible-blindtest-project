@@ -59,7 +59,7 @@ namespace KureiBlindTest
             }
         }
 
-        private void FrmGame_LoadAsync(object sender, EventArgs e)
+        private void FrmGame_LoadAsync  (object sender, EventArgs e)
         {
             this.newRound();
             UpdateUI();
