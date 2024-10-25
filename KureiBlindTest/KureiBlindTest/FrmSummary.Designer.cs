@@ -39,7 +39,8 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTitle.Font = new System.Drawing.Font("Verdana", 26.25F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblTitle.Location = new System.Drawing.Point(12, 38);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(590, 80);
@@ -49,7 +50,8 @@
             // 
             // lblSummaryCategory
             // 
-            this.lblSummaryCategory.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblSummaryCategory.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSummaryCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblSummaryCategory.Location = new System.Drawing.Point(12, 155);
             this.lblSummaryCategory.Name = "lblSummaryCategory";
             this.lblSummaryCategory.Size = new System.Drawing.Size(590, 80);
@@ -59,7 +61,8 @@
             // 
             // lblSummaryDifficulty
             // 
-            this.lblSummaryDifficulty.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblSummaryDifficulty.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSummaryDifficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblSummaryDifficulty.Location = new System.Drawing.Point(12, 235);
             this.lblSummaryDifficulty.Name = "lblSummaryDifficulty";
             this.lblSummaryDifficulty.Size = new System.Drawing.Size(590, 80);
@@ -80,19 +83,21 @@
             // 
             // btnStart
             // 
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnStart.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold);
             this.btnStart.Location = new System.Drawing.Point(104, 372);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(390, 65);
             this.btnStart.TabIndex = 7;
             this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // FrmSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(0)))), ((int)(((byte)(36)))));
             this.ClientSize = new System.Drawing.Size(614, 640);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.pbxGoBack);

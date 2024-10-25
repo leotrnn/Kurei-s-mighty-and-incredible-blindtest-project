@@ -43,20 +43,23 @@ namespace KureiBlindTest
             RemainingPlays = 0;
             score = 0;
 
-          
+
         }
+
+      
+
 
         public void UpdateUI()
         {
             lblRemainingPlays.Text = $"Remaining plays : {RemainingPlays}";
             lblTitle.Text = $"Round N°{Nround}";
-            if(Nround-1 != 0)
+            if (Nround - 1 != 0)
             {
                 lblScore.Text = $"Score : {score}/{Nround - 1}";
             }
         }
 
-        private void FrmGame_Load(object sender, EventArgs e)
+        private void FrmGame_LoadAsync(object sender, EventArgs e)
         {
             this.newRound();
             UpdateUI();
@@ -142,15 +145,15 @@ namespace KureiBlindTest
                             switch (Properties.Settings.Default.Difficulty)
                             {
                                 case "Easy":
-                                    startPosition = TimeSpan.FromSeconds(random.NextDouble() * (totalDuration.TotalSeconds - 10));
-                                    break;
-
-                                case "Medium":
                                     startPosition = TimeSpan.FromSeconds(random.NextDouble() * (totalDuration.TotalSeconds - 5));
                                     break;
 
-                                case "Hard":
+                                case "Medium":
                                     startPosition = TimeSpan.FromSeconds(random.NextDouble() * (totalDuration.TotalSeconds - 3));
+                                    break;
+
+                                case "Hard":
+                                    startPosition = TimeSpan.FromSeconds(random.NextDouble() * (totalDuration.TotalSeconds - 1));
                                     break;
                             }
 
@@ -176,21 +179,21 @@ namespace KureiBlindTest
             {
                 var youtube = new YoutubeClient();
 
-                // Get the video stream manifest
+                // Récupérer le manifeste de flux vidéo
                 var streamManifest = await youtube.Videos.Streams.GetManifestAsync(youtubeLink);
 
-                // Select the best audio stream
+                // Sélectionner le meilleur flux audio
                 var streamInfo = streamManifest.GetAudioOnlyStreams().GetWithHighestBitrate();
 
                 if (streamInfo != null)
                 {
-                    // Download the stream to memory
+                    // Télécharger le flux en mémoire
                     using (var stream = await youtube.Videos.Streams.GetAsync(streamInfo))
                     using (var memoryStream = new MemoryStream())
                     {
                         await stream.CopyToAsync(memoryStream);
 
-                        // Save the stream to a temporary file
+                        // Sauvegarder le flux dans un fichier temporaire
                         string tempFilePath = Path.GetTempFileName();
                         using (var fileStream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
                         {
@@ -198,29 +201,32 @@ namespace KureiBlindTest
                             await memoryStream.CopyToAsync(fileStream);
                         }
 
-                        // Play the selected random 5 second segment using NAudio
+                        // Lire le segment audio à partir de la position de départ choisie
                         using (var reader = new MediaFoundationReader(tempFilePath))
                         {
                             reader.CurrentTime = startPosition;
 
-                            // Utilisation de waveOut global pour permettre l'arrêt depuis pbxLogo_Click
+                            // Initialiser le lecteur audio avec le flux
                             waveOut.Init(reader);
-                            waveOut.Volume = volume; // Définit le volume actuel
+                            waveOut.Volume = volume; // Définir le volume actuel
                             waveOut.Play();
+
+                            // Ajouter un délai pour éviter que le lecteur ne se mette en pause immédiatement
+                            await Task.Delay(100); // Laisser le temps au lecteur de démarrer
 
                             // Durée de lecture en fonction de la difficulté
                             switch (Properties.Settings.Default.Difficulty)
                             {
                                 case "Easy":
-                                    await Task.Delay(TimeSpan.FromSeconds(10));
-                                    break;
-
-                                case "Medium":
                                     await Task.Delay(TimeSpan.FromSeconds(5));
                                     break;
 
-                                case "Hard":
+                                case "Medium":
                                     await Task.Delay(TimeSpan.FromSeconds(3));
+                                    break;
+
+                                case "Hard":
+                                    await Task.Delay(TimeSpan.FromSeconds(1));
                                     break;
                             }
                         }
@@ -242,11 +248,11 @@ namespace KureiBlindTest
             }
         }
 
+
         private void pbxLogo_Click(object sender, EventArgs e)
         {
             if (RemainingPlays > 0)
             {
-
                 // Alterne entre play et pause
                 if (!isPlaying)
                 {
@@ -257,8 +263,12 @@ namespace KureiBlindTest
                 }
                 else
                 {
-                    pbxLogo.Image = Properties.Resources.play;
-                    waveOut.Stop(); // Arrête la lecture audio avec NAudio
+                    // Ne pas arrêter le lecteur si il n'est pas en lecture
+                    if (waveOut.PlaybackState == PlaybackState.Playing)
+                    {
+                        pbxLogo.Image = Properties.Resources.play;
+                        waveOut.Stop(); // Arrête la lecture audio avec NAudio
+                    }
                 }
 
                 isPlaying = !isPlaying;
@@ -266,17 +276,21 @@ namespace KureiBlindTest
             }
         }
 
+
         private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
         {
+            // Arrêtez la lecture de l'audio et mettez à jour l'interface utilisateur
             if (InvokeRequired)
             {
                 Invoke((Action)(() => WaveOut_PlaybackStopped(sender, e)));
                 return;
             }
 
+            // Réinitialisez l'état de lecture
             pbxLogo.Image = Properties.Resources.play;
-            isPlaying = false;
+            isPlaying = false; // Mettez à jour isPlaying à false ici
         }
+
 
 
 
@@ -328,42 +342,45 @@ namespace KureiBlindTest
                 Task.Run(async () => await ChooseRandomStartPosition(youtubeLink));
             }
 
-            
-
-            List<Song> lstSong = this.SelectAllSongs();
-            List<Control> lstAnswers = new List<Control> { btnOption1, btnOption2, btnOption3, btnOption4 };
+            // Création de la liste des réponses
+            List<Song> lstAnswers = new List<Song> { realAnswer }; // Assurez-vous que la bonne réponse est là
             Random rng = new Random();
-            lstSong = lstSong.OrderBy(a => rng.Next()).ToList();
-            bool isTheCorrectAnswer;
 
-            if (realAnswer != null)
+            // Ajoutez d'autres chansons aléatoires
+            while (lstAnswers.Count < 4)
             {
-                for (int i = 0; i < lstAnswers.Count; i++)
+                int index = rng.Next(0, allSongs.Count);
+                if (!lstAnswers.Contains(allSongs[index])) // Assurez-vous qu'on n'ajoute pas la même chanson
                 {
-                    lstAnswers[i].Enabled = true;
-                    lstAnswers[i].Text = $"{lstSong[i].ArtistSong} - {lstSong[i].NameSong}";
-                    isTheCorrectAnswer = (realAnswer.NameSong == lstSong[i].NameSong);
-                    lstAnswers[i].Tag = (isTheCorrectAnswer, lstSong[i]);
+                    lstAnswers.Add(allSongs[index]);
                 }
             }
-            else
+
+            // Mélanger les réponses
+            lstAnswers = lstAnswers.OrderBy(a => rng.Next()).ToList();
+            List<Control> lstOptions = new List<Control> { btnOption1, btnOption2, btnOption3, btnOption4 };
+
+            for (int i = 0; i < lstOptions.Count; i++)
             {
-                for (int i = 0; i < lstAnswers.Count; i++)
-                {
-                    lstAnswers[i].Enabled = false;
-                }
+                lstOptions[i].Enabled = true;
+                lstOptions[i].Text = $"{lstAnswers[i].ArtistSong} - {lstAnswers[i].NameSong}";
+
+                // Vérifiez si la réponse est correcte
+                bool isTheCorrectAnswer = (realAnswer.NameSong == lstAnswers[i].NameSong);
+                lstOptions[i].Tag = (isTheCorrectAnswer, realAnswer.NameSong);
             }
         }
+
 
 
         private void btnOption1_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            var tagTuple = ((bool, Song))btn.Tag;
+            var tagTuple = ((bool, string))btn.Tag;
 
             // Extraire les éléments du ValueTuple
             bool isTheCorrectAnswer = tagTuple.Item1;
-            Song song = tagTuple.Item2;
+            string song = tagTuple.Item2;
 
 
             // Utiliser isTheCorrectAnswer et song
@@ -375,7 +392,7 @@ namespace KureiBlindTest
             }
             else
             {
-                lblInfo.Text = $"Incorrect, answer was {song.NameSong}";
+                lblInfo.Text = $"Incorrect, answer was {song}";
                 //styles.LoadCustomFont(lblInfo, 20f, Color.Red);
             }
 
@@ -391,7 +408,12 @@ namespace KureiBlindTest
                 waveOut.Dispose();
             }
         }
+
+        private void FrmGame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 
-   
+
 }

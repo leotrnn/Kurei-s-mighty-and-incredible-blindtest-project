@@ -42,7 +42,8 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTitle.Font = new System.Drawing.Font("Verdana", 26.25F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblTitle.Location = new System.Drawing.Point(12, 38);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(590, 80);
@@ -52,33 +53,37 @@
             // 
             // btnGenres
             // 
+            this.btnGenres.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnGenres.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold);
             this.btnGenres.Location = new System.Drawing.Point(15, 140);
             this.btnGenres.Name = "btnGenres";
             this.btnGenres.Size = new System.Drawing.Size(543, 65);
             this.btnGenres.TabIndex = 6;
             this.btnGenres.Text = "Genres";
             this.btnGenres.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGenres.UseVisualStyleBackColor = true;
+            this.btnGenres.UseVisualStyleBackColor = false;
             this.btnGenres.Click += new System.EventHandler(this.btnGenres_Click);
             this.btnGenres.Paint += new System.Windows.Forms.PaintEventHandler(this.btnGenres_Paint);
             // 
             // btnArtists
             // 
+            this.btnArtists.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnArtists.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold);
             this.btnArtists.Location = new System.Drawing.Point(15, 211);
             this.btnArtists.Name = "btnArtists";
             this.btnArtists.Size = new System.Drawing.Size(543, 65);
             this.btnArtists.TabIndex = 7;
             this.btnArtists.Text = "Artists";
             this.btnArtists.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnArtists.UseVisualStyleBackColor = true;
+            this.btnArtists.UseVisualStyleBackColor = false;
             this.btnArtists.Click += new System.EventHandler(this.btnArtists_Click);
             this.btnArtists.Paint += new System.Windows.Forms.PaintEventHandler(this.btnGenres_Paint);
             // 
             // pbxArtistsArrow
             // 
-            this.pbxArtistsArrow.BackColor = System.Drawing.Color.Transparent;
+            this.pbxArtistsArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pbxArtistsArrow.Image = ((System.Drawing.Image)(resources.GetObject("pbxArtistsArrow.Image")));
-            this.pbxArtistsArrow.Location = new System.Drawing.Point(551, 227);
+            this.pbxArtistsArrow.Location = new System.Drawing.Point(513, 227);
             this.pbxArtistsArrow.Name = "pbxArtistsArrow";
             this.pbxArtistsArrow.Size = new System.Drawing.Size(35, 35);
             this.pbxArtistsArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -88,9 +93,9 @@
             // 
             // pbxGenresArrow
             // 
-            this.pbxGenresArrow.BackColor = System.Drawing.Color.Transparent;
+            this.pbxGenresArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pbxGenresArrow.Image = global::KureiBlindTest.Properties.Resources.rightArrow;
-            this.pbxGenresArrow.Location = new System.Drawing.Point(551, 154);
+            this.pbxGenresArrow.Location = new System.Drawing.Point(513, 154);
             this.pbxGenresArrow.Name = "pbxGenresArrow";
             this.pbxGenresArrow.Size = new System.Drawing.Size(35, 35);
             this.pbxGenresArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -113,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(0)))), ((int)(((byte)(36)))));
             this.ClientSize = new System.Drawing.Size(614, 640);
             this.Controls.Add(this.pbxArtistsArrow);
             this.Controls.Add(this.pbxGenresArrow);

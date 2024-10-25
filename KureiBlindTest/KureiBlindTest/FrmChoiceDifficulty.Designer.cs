@@ -45,7 +45,8 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTitle.Font = new System.Drawing.Font("Verdana", 26.25F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblTitle.Location = new System.Drawing.Point(12, 38);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(590, 80);
@@ -55,6 +56,8 @@
             // 
             // btnEasy
             // 
+            this.btnEasy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnEasy.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold);
             this.btnEasy.ForeColor = System.Drawing.Color.Black;
             this.btnEasy.Location = new System.Drawing.Point(15, 140);
             this.btnEasy.Name = "btnEasy";
@@ -62,39 +65,43 @@
             this.btnEasy.TabIndex = 6;
             this.btnEasy.Text = "Easy";
             this.btnEasy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEasy.UseVisualStyleBackColor = true;
+            this.btnEasy.UseVisualStyleBackColor = false;
             this.btnEasy.Click += new System.EventHandler(this.btnEasy_Click);
             this.btnEasy.Paint += new System.Windows.Forms.PaintEventHandler(this.btnEasy_Paint);
             // 
             // btnMedium
             // 
+            this.btnMedium.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMedium.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold);
             this.btnMedium.Location = new System.Drawing.Point(15, 211);
             this.btnMedium.Name = "btnMedium";
             this.btnMedium.Size = new System.Drawing.Size(543, 65);
             this.btnMedium.TabIndex = 7;
             this.btnMedium.Text = "Medium";
             this.btnMedium.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMedium.UseVisualStyleBackColor = true;
+            this.btnMedium.UseVisualStyleBackColor = false;
             this.btnMedium.Click += new System.EventHandler(this.btnMedium_Click);
             this.btnMedium.Paint += new System.Windows.Forms.PaintEventHandler(this.btnEasy_Paint);
             // 
             // btnHard
             // 
+            this.btnHard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnHard.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold);
             this.btnHard.Location = new System.Drawing.Point(15, 282);
             this.btnHard.Name = "btnHard";
             this.btnHard.Size = new System.Drawing.Size(543, 65);
             this.btnHard.TabIndex = 10;
             this.btnHard.Text = "Hard";
             this.btnHard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHard.UseVisualStyleBackColor = true;
+            this.btnHard.UseVisualStyleBackColor = false;
             this.btnHard.Click += new System.EventHandler(this.btnHard_Click);
             this.btnHard.Paint += new System.Windows.Forms.PaintEventHandler(this.btnEasy_Paint);
             // 
             // pbxHard
             // 
-            this.pbxHard.BackColor = System.Drawing.Color.Transparent;
+            this.pbxHard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pbxHard.Image = global::KureiBlindTest.Properties.Resources.rightArrow;
-            this.pbxHard.Location = new System.Drawing.Point(551, 298);
+            this.pbxHard.Location = new System.Drawing.Point(513, 298);
             this.pbxHard.Name = "pbxHard";
             this.pbxHard.Size = new System.Drawing.Size(35, 35);
             this.pbxHard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -104,9 +111,9 @@
             // 
             // pbxMedium
             // 
-            this.pbxMedium.BackColor = System.Drawing.Color.Transparent;
+            this.pbxMedium.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pbxMedium.Image = global::KureiBlindTest.Properties.Resources.rightArrow;
-            this.pbxMedium.Location = new System.Drawing.Point(551, 227);
+            this.pbxMedium.Location = new System.Drawing.Point(513, 228);
             this.pbxMedium.Name = "pbxMedium";
             this.pbxMedium.Size = new System.Drawing.Size(35, 35);
             this.pbxMedium.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -116,9 +123,9 @@
             // 
             // pbxEasy
             // 
-            this.pbxEasy.BackColor = System.Drawing.Color.Transparent;
+            this.pbxEasy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pbxEasy.Image = global::KureiBlindTest.Properties.Resources.rightArrow;
-            this.pbxEasy.Location = new System.Drawing.Point(551, 154);
+            this.pbxEasy.Location = new System.Drawing.Point(513, 154);
             this.pbxEasy.Name = "pbxEasy";
             this.pbxEasy.Size = new System.Drawing.Size(35, 35);
             this.pbxEasy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -141,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(0)))), ((int)(((byte)(36)))));
             this.ClientSize = new System.Drawing.Size(614, 640);
             this.Controls.Add(this.pbxHard);
             this.Controls.Add(this.btnHard);
