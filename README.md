@@ -46,3 +46,33 @@ git clone https://github.com/leotrnn/kureiblindtest.git
 Uninstall-Package YoutubeExplode
 Ininstall-Package YoutubeExplode
 ```
+
+<h3>The music sample appears empty when you try to play it ?</h3>
+
+<p align="Justify">Many solutions :</p>
+
+<h4>The sample chose a part of the song where there is no music</h4>
+<p>Can't do much about it, remove the song from the database or keep it until the sample choose a good part</p>
+
+<h4>The sample is too short</h4>
+<p>That means that the song is also too short, here's the configurations of the samples length</p>
+<table>
+    <tr>
+        <th>Difficulty</th>
+        <th>Length</th>
+    </tr>
+    <tr>
+        <td>Easy</td>
+        <td>5s</td>
+    </tr>
+     <tr>
+        <td>Medium</td>
+        <td>3s</td>
+    </tr>
+     <tr>
+        <td>Hard</td>
+        <td>1s</td>
+    </tr>
+</table>
+
+
